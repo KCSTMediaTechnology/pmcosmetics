@@ -767,7 +767,9 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-        <p id="loadingText">Opening UPI app...</p>
+        <p id="loadingText" style="text-align:center;padding:0 24px;">Preparing your order...</p>
+        <button id="upiPayBtn" onclick="openUpiApp()" style="display:none;margin-top:18px;background:#c8102e;color:#fff;border:none;padding:14px 28px;border-radius:60px;font-weight:700;font-size:16px;cursor:pointer;align-items:center;gap:8px;font-family:'Inter',sans-serif;"><i class="fas fa-mobile-alt"></i> Pay via UPI</button>
+        <button onclick="finishOrder()" style="margin-top:10px;background:transparent;color:#6b5f4e;border:none;padding:10px 20px;font-weight:600;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;">Done</button>
     </div>
 
     <script>
@@ -1261,6 +1263,35 @@
         // ==========================================
         // SUBMIT ORDER - SAVES TO SUPABASE
         // ==========================================
+        // Opens the UPI app (needs a tap on some phones, so a button is also provided)
+        let upiState = { url: '', opened: false, waiting: false };
+
+        function openUpiApp() {
+            if (!upiState.url) return;
+            upiState.opened = true;
+            upiState.waiting = false;
+            window.location.href = upiState.url;
+        }
+        window.openUpiApp = openUpiApp;
+
+        function finishOrder() {
+            cart = [];
+            updateCartUI();
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.remove('active', 'success');
+            document.getElementById('upiPayBtn').style.display = 'none';
+            document.getElementById('loadingText').textContent = 'Preparing your order...';
+            upiState = { url: '', opened: false, waiting: false };
+        }
+        window.finishOrder = finishOrder;
+
+        // When customer comes back from WhatsApp, open UPI automatically
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible' && upiState.waiting && !upiState.opened) {
+                setTimeout(openUpiApp, 400);
+            }
+        });
+
         document.getElementById('submitOrderBtn').addEventListener('click', async function() {
             const name = document.getElementById('customerName').value.trim();
             const phone = document.getElementById('customerPhone').value.trim();
@@ -1277,14 +1308,12 @@
             cart.forEach(item => {
                 const itemTotal = item.price * item.qty;
                 total += itemTotal;
-                orderItems.push({
-                    name: item.name,
-                    size: item.size,
-                    qty: item.qty,
-                    price: item.price
-                });
+                orderItems.push({ name: item.name, size: item.size, qty: item.qty, price: item.price });
                 orderDetails += `🧴 ${item.size} × ${item.qty} = ₹${itemTotal}\n`;
             });
+
+            // Open the WhatsApp tab NOW (inside the tap) so the browser doesn't block it later
+            const waWindow = window.open('about:blank', '_blank');
 
             // ===== SAVE ORDER TO SUPABASE =====
             try {
@@ -1302,60 +1331,60 @@
 
                 if (error) {
                     console.error('❌ Error saving order:', error);
+                    if (waWindow) waWindow.close();
                     showToast('Error placing order. Please try again.', 'error');
                     return;
                 }
-
                 console.log('✅ Order saved to database:', data);
                 showToast('✅ Order placed successfully!', 'success');
-
             } catch (e) {
                 console.error('❌ Error:', e);
+                if (waWindow) waWindow.close();
                 showToast('Error placing order. Please try again.', 'error');
                 return;
             }
 
-            // Continue with UPI and WhatsApp
             closeCheckoutForm();
             closeCartDesktop();
             closeCartMobile();
 
+            // ===== STEP 1: WHATSAPP MESSAGE =====
+            let message = '🛍️ *PM HANDMADE COSMETICS Order*\n';
+            message += '------------------------\n';
+            message += `👤 *Name:* ${name}\n`;
+            message += `📱 *Phone:* ${phone}\n`;
+            message += `📍 *Address:* ${address}\n`;
+            if (notes) { message += `📝 *Notes:* ${notes}\n`; }
+            message += '------------------------\n';
+            message += orderDetails;
+            message += '------------------------\n';
+            message += `💰 *Total: ₹${total}*\n`;
+            message += '\n📦 *PM HANDMADE COSMETICS*\n';
+            message += 'Thank you for your order! 🙏';
+
+            const waUrl = `https://wa.me/919744705652?text=${encodeURIComponent(message)}`;
+
+            // ===== STEP 2: UPI (opens after WhatsApp) =====
+            upiState = {
+                url: `upi://pay?pa=8589917810@ptyes&pn=PM%20Face%20Oil&am=${total}&cu=INR&tn=PM%20Face%20Oil%20Order`,
+                opened: false,
+                waiting: true
+            };
+
             const overlay = document.getElementById('loadingOverlay');
-            overlay.classList.add('active');
-            document.getElementById('loadingText').textContent = 'Opening UPI app...';
+            const payBtn = document.getElementById('upiPayBtn');
+            payBtn.innerHTML = `<i class="fas fa-mobile-alt"></i> Pay ${formatCurrency(total)} via UPI`;
+            payBtn.style.display = 'inline-flex';
+            overlay.classList.add('active', 'success');
+            document.getElementById('loadingText').innerHTML =
+                '✅ WhatsApp opened!<br><small>Send the message there, then come back — UPI will open for payment.</small>';
 
-            setTimeout(function() {
-                const upiUrl = `upi://pay?pa=8589917810@ptyes&pn=PM%20Face%20Oil&am=${total}&cu=INR&tn=PM%20Face%20Oil%20Order`;
-                window.location.href = upiUrl;
-
-                setTimeout(function() {
-                    document.getElementById('loadingText').textContent = '✅ Payment initiated! Sending order confirmation...';
-                    overlay.classList.add('success');
-
-                    let message = '🛍️ *PM HANDMADE COSMETICS Order*%0A';
-                    message += '------------------------%0A';
-                    message += `👤 *Name:* ${name}%0A`;
-                    message += `📱 *Phone:* ${phone}%0A`;
-                    message += `📍 *Address:* ${address}%0A`;
-                    if (notes) { message += `📝 *Notes:* ${notes}%0A`; }
-                    message += '------------------------%0A';
-                    message += orderDetails.replace(/\n/g, '%0A');
-                    message += '------------------------%0A';
-                    message += `💰 *Total: ₹${total}*%0A`;
-                    message += '%0A📦 *PM Pharmaceuticals*%0A';
-                    message += 'Thank you for your order! 🙏';
-
-                    window.open(`https://wa.me/919744705652?text=${message}`, '_blank');
-
-                    setTimeout(function() {
-                        cart = [];
-                        updateCartUI();
-                        overlay.classList.remove('active');
-                        overlay.classList.remove('success');
-                        document.getElementById('loadingText').textContent = 'Opening UPI app...';
-                    }, 2000);
-                }, 1500);
-            }, 500);
+            // Open WhatsApp with the order message
+            if (waWindow) {
+                waWindow.location.href = waUrl;
+            } else if (window.open(waUrl, '_blank') === null) {
+                window.location.href = waUrl;
+            }
 
             document.getElementById('customerName').value = '';
             document.getElementById('customerPhone').value = '';
