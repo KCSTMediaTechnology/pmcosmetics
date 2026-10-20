@@ -347,6 +347,138 @@
         .loading-products { text-align: center; padding: 40px; color: #6b5f4e; width: 100%; grid-column: 1 / -1; }
         .loading-products i { font-size: 40px; margin-bottom: 14px; display: block; }
 
+
+        /* ===== ACCOUNT / AUTH ===== */
+        .account-btn { background: transparent; border: 1.5px solid #c8102e; color: #c8102e; padding: 9px 18px; border-radius: 60px; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; transition: 0.2s; }
+        .account-btn:hover { background: #c8102e; color: #fff; }
+        .account-btn.icon-only { padding: 9px 12px; }
+        .auth-tabs { display: flex; background: #f5f0ec; border-radius: 60px; padding: 4px; margin-bottom: 20px; }
+        .auth-tabs button { flex: 1; border: none; background: transparent; padding: 10px; border-radius: 60px; font-weight: 600; font-size: 14px; color: #6b5f4e; cursor: pointer; font-family: 'Inter', sans-serif; }
+        .auth-tabs button.active { background: #c8102e; color: #fff; }
+        .auth-error { color: #c8102e; font-size: 13px; font-weight: 600; margin: 4px 0 8px; min-height: 18px; text-align: center; }
+        .account-info { background: #f8f5f0; padding: 14px 16px; border-radius: 16px; margin-bottom: 18px; font-size: 15px; line-height: 1.7; }
+        .account-info strong { color: #c8102e; }
+
+        /* ===== ACCOUNT PAGE ===== */
+        .toast { z-index: 3500 !important; }
+        .acct-page { position: fixed; inset: 0; z-index: 2600; background: #faf7f3; display: none; flex-direction: column; font-family: 'Inter', sans-serif; color: #1a1a1a; }
+        .acct-page.open { display: flex; animation: acctFade .25s ease; }
+        @keyframes acctFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        .acct-topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 20px; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.06); flex-shrink: 0; }
+        .acct-topbar-title { font-weight: 800; font-size: 17px; letter-spacing: .2px; }
+        .acct-back, .acct-logout { border: none; background: #f5f0ec; color: #4a4034; padding: 9px 16px; border-radius: 60px; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; transition: .2s; }
+        .acct-back:hover { background: #ebe3dc; }
+        .acct-logout { color: #c8102e; }
+        .acct-logout:hover { background: #fde2e2; }
+        .acct-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 22px 16px 60px; }
+        .acct-container { max-width: 860px; margin: 0 auto; }
+
+        .acct-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #c8102e 0%, #8b1a2b 100%); color: #fff; border-radius: 28px; padding: 28px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; box-shadow: 0 14px 36px rgba(200,16,46,.28); }
+        .acct-hero::before { content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,.08); top: -90px; right: -60px; }
+        .acct-hero::after { content: ''; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,.06); bottom: -70px; left: 30%; }
+        .acct-avatar { position: relative; z-index: 1; width: 82px; height: 82px; border-radius: 50%; background: #fff; color: #c8102e; font-size: 34px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px rgba(255,255,255,.28); flex-shrink: 0; text-transform: uppercase; }
+        .acct-hero-info { position: relative; z-index: 1; flex: 1; min-width: 200px; }
+        .acct-hero-info h1 { margin: 0 0 6px; font-size: 24px; font-weight: 800; word-break: break-word; }
+        .acct-hero-info p { margin: 0 0 10px; font-size: 15px; opacity: .92; display: flex; align-items: center; gap: 8px; }
+        .acct-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,.18); padding: 6px 14px; border-radius: 60px; font-size: 12.5px; font-weight: 600; backdrop-filter: blur(4px); }
+        .acct-stats { position: relative; z-index: 1; display: flex; gap: 12px; }
+        .acct-stat { background: rgba(255,255,255,.16); border-radius: 18px; padding: 12px 18px; text-align: center; min-width: 96px; backdrop-filter: blur(4px); }
+        .acct-stat b { display: block; font-size: 22px; font-weight: 800; }
+        .acct-stat span { font-size: 12px; opacity: .88; }
+
+        .acct-tabs { display: flex; gap: 6px; background: #fff; padding: 6px; border-radius: 60px; margin: 20px 0; box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+        .acct-tab { flex: 1; border: none; background: transparent; padding: 12px 8px; border-radius: 60px; font-weight: 700; font-size: 14px; color: #6b5f4e; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', sans-serif; transition: .2s; }
+        .acct-tab.active { background: #c8102e; color: #fff; box-shadow: 0 6px 16px rgba(200,16,46,.3); }
+
+        .acct-panel { display: none; }
+        .acct-panel.active { display: block; animation: acctFade .25s ease; }
+        .acct-card { background: #fff; border-radius: 22px; padding: 22px; box-shadow: 0 6px 24px rgba(0,0,0,.06); margin-bottom: 16px; }
+        .acct-card h3 { margin: 0 0 4px; font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .acct-card h3 i { color: #c8102e; }
+        .acct-sub { margin: 0 0 16px; color: #8b7a62; font-size: 13.5px; }
+        .acct-field { margin-bottom: 14px; }
+        .acct-field label { display: block; font-size: 13px; font-weight: 700; color: #4a4034; margin-bottom: 6px; }
+        .acct-field input, .acct-field textarea { width: 100%; padding: 13px 16px; border: 2px solid #ece4dc; border-radius: 14px; font-size: 15px; font-family: 'Inter', sans-serif; background: #fdfbf9; outline: none; box-sizing: border-box; transition: .2s; }
+        .acct-field textarea { min-height: 110px; resize: vertical; }
+        .acct-field input:focus, .acct-field textarea:focus { border-color: #c8102e; background: #fff; box-shadow: 0 0 0 4px rgba(200,16,46,.08); }
+        .acct-field input[disabled] { background: #f3eee9; color: #8b7a62; }
+        .acct-btn { border: none; background: #c8102e; color: #fff; padding: 13px 24px; border-radius: 60px; font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; transition: .2s; box-shadow: 0 6px 16px rgba(200,16,46,.28); }
+        .acct-btn:hover { background: #a80d26; transform: translateY(-1px); }
+        .acct-btn:disabled { opacity: .6; cursor: default; transform: none; }
+        .acct-btn.ghost { background: #f5f0ec; color: #4a4034; box-shadow: none; }
+        .acct-btn.ghost:hover { background: #ebe3dc; }
+        .acct-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .addr-box { display: flex; gap: 14px; align-items: flex-start; background: linear-gradient(135deg, #fff7f8, #fdf3ee); border: 1.5px dashed #e8b9c0; border-radius: 18px; padding: 18px; margin-bottom: 16px; }
+        .addr-pin { width: 44px; height: 44px; border-radius: 50%; background: #c8102e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .addr-text { flex: 1; font-size: 15px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+        .addr-empty { color: #8b7a62; }
+
+        .ord { background: #fff; border-radius: 22px; box-shadow: 0 6px 24px rgba(0,0,0,.06); margin-bottom: 16px; overflow: hidden; }
+        .ord-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 20px; background: #fdf9f5; border-bottom: 1px solid #f0e8e0; flex-wrap: wrap; }
+        .ord-no { font-weight: 800; font-size: 15px; }
+        .ord-date { font-size: 12.5px; color: #8b7a62; margin-top: 2px; }
+        .ord-pill { font-size: 12.5px; font-weight: 700; padding: 6px 14px; border-radius: 60px; background: #fff3cd; color: #8a6d00; display: inline-flex; align-items: center; gap: 6px; }
+        .ord-pill.done { background: #d9f5e3; color: #1a7a3e; }
+        .ord-pill.cancel { background: #fde2e2; color: #c8102e; }
+        .ord-body { padding: 16px 20px; }
+        .ord-item { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 14.5px; border-bottom: 1px dashed #efe7df; }
+        .ord-item:last-child { border-bottom: none; }
+        .ord-item small { color: #8b7a62; margin-left: 6px; }
+        .ord-item .amt { font-weight: 700; white-space: nowrap; }
+        .ord-trk { display: flex; align-items: flex-start; padding: 6px 4px 2px; }
+        .ord-step { flex: 1; text-align: center; position: relative; font-size: 11px; color: #a89b88; font-weight: 600; }
+        .ord-step::before { content: ''; display: block; width: 14px; height: 14px; border-radius: 50%; background: #e6ddd3; margin: 0 auto 6px; position: relative; z-index: 1; }
+        .ord-step::after { content: ''; position: absolute; top: 6px; left: -50%; width: 100%; height: 2px; background: #e6ddd3; }
+        .ord-step:first-child::after { display: none; }
+        .ord-step.on { color: #1a7a3e; }
+        .ord-step.on::before, .ord-step.on::after { background: #25a244; }
+        .ord-foot { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-top: 1px solid #f0e8e0; font-weight: 700; }
+        .ord-foot .tot { color: #c8102e; font-size: 18px; font-weight: 800; }
+        .acct-empty { text-align: center; padding: 46px 20px; background: #fff; border-radius: 22px; box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+        .acct-empty .em { font-size: 52px; margin-bottom: 10px; }
+        .acct-empty h4 { margin: 0 0 6px; font-size: 18px; font-weight: 800; }
+        .acct-empty p { margin: 0 0 18px; color: #8b7a62; font-size: 14px; }
+
+        @media (max-width: 600px) {
+            .acct-topbar { padding: 10px 12px; }
+            .acct-back span, .acct-logout span { display: none; }
+            .acct-back, .acct-logout { padding: 10px 14px; }
+            .acct-scroll { padding: 14px 12px 50px; }
+            .acct-hero { padding: 22px 18px; border-radius: 24px; }
+            .acct-avatar { width: 68px; height: 68px; font-size: 28px; }
+            .acct-hero-info h1 { font-size: 20px; }
+            .acct-stats { width: 100%; }
+            .acct-stat { flex: 1; }
+            .acct-tab { font-size: 12.5px; padding: 11px 4px; gap: 5px; }
+            .acct-card { padding: 18px 16px; }
+            .acct-btn { padding: 12px 20px; }
+        }
+
+        /* ===== PASSWORD EYE + AVATAR UPLOAD ===== */
+        .pw-wrap { position: relative; }
+        .checkout-form-box .pw-wrap input, .acct-field .pw-wrap input { padding-right: 48px; }
+        .pw-eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: #8b7a62; font-size: 16px; padding: 10px; cursor: pointer; line-height: 1; border-radius: 50%; }
+        .pw-eye:hover { color: #c8102e; }
+        .acct-avatar-wrap { position: relative; z-index: 1; flex-shrink: 0; }
+        .acct-cam { position: absolute; right: -2px; bottom: -2px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; background: #1a1a1a; color: #fff; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+        .acct-cam:hover { background: #000; transform: scale(1.06); }
+        .phone-boxes { display: flex; gap: 4px; }
+        .checkout-form-box .phone-boxes input.phone-box { flex: 1 1 0; width: 0; min-width: 0; height: 42px; padding: 0; text-align: center; font-size: 17px; font-weight: 700; border-radius: 10px; }
+        .checkout-form-box .phone-boxes input.phone-box.filled { border-color: #25a244; background: #e9f9ee; color: #1a7a3e; }
+        .checkout-form-box .phone-boxes input.phone-box.filled:focus { border-color: #25a244; box-shadow: 0 0 0 3px rgba(37,162,68,0.18); background: #e9f9ee; }
+        @media (max-width: 380px) { .phone-boxes { gap: 3px; } .checkout-form-box .phone-boxes input.phone-box { height: 38px; font-size: 16px; border-radius: 8px; } }
+        .acc-section { font-size: 16px; font-weight: 700; margin: 18px 0 10px; color: #1a1a1a; }
+        .order-card { background: #f8f5f0; border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; font-size: 14px; }
+        .order-card .oc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
+        .order-card .oc-date { font-weight: 600; color: #1a1a1a; }
+        .order-card .oc-status { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 60px; background: #fff3cd; color: #8a6d00; }
+        .order-card .oc-status.done { background: #d9f5e3; color: #1a7a3e; }
+        .order-card .oc-status.cancel { background: #fde2e2; color: #c8102e; }
+        .order-card .oc-items { color: #4a4034; line-height: 1.6; }
+        .order-card .oc-total { margin-top: 6px; font-weight: 700; color: #c8102e; }
+        .orders-empty { text-align: center; color: #8b7a62; font-size: 14px; padding: 10px 0 4px; }
+
         /* ===== CHECKOUT FORM ===== */
         .checkout-form-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .checkout-form-overlay.active { display: flex; }
@@ -513,6 +645,7 @@
                 <a href="#">Ritual</a>
                 <a href="#">Science</a>
                 <span class="btn-outline"><i class="fas fa-flask"></i> PM</span>
+                <button class="account-btn" id="accountBtnDesktop"><i class="fas fa-user"></i> <span class="account-label">Login</span></button>
                 <button class="cart-btn" id="cartToggleDesktop">
                     <i class="fas fa-shopping-bag"></i> Cart
                     <span class="cart-badge" id="cartCountDesktop">0</span>
@@ -623,7 +756,7 @@
                 <div class="logo-text">PM <span>HANDMADE</span></div>
             </div>
             <div class="nav-right">
-                <span class="btn-outline"><i class="fas fa-flask"></i> PM</span>
+                <button class="account-btn icon-only" id="accountBtnMobile"><i class="fas fa-user"></i></button>
                 <button class="cart-btn" id="cartToggleMobile">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="cart-badge" id="cartCountMobile">0</span>
@@ -712,7 +845,7 @@
             <button class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
             <button class="nav-item" data-tab="shop" id="navShopMobile"><i class="fas fa-shopping-bag"></i><span>Shop</span></button>
             <button class="nav-item" data-tab="cart" id="navCartMobile"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="nav-badge" id="navBadgeMobile" style="display:none;">0</span></button>
-            <button class="nav-item" data-tab="profile"><i class="fas fa-user"></i><span>Profile</span></button>
+            <button class="nav-item" data-tab="profile" id="navProfileMobile"><i class="fas fa-user"></i><span>Profile</span></button>
         </div>
 
         <div class="cart-overlay" id="cartOverlayMobile"></div>
@@ -727,6 +860,137 @@
             <div class="cart-footer" id="cartFooterMobile" style="display: none;">
                 <div class="cart-total"><span>Total</span><span id="cartTotalMobile">₹0</span></div>
                 <button class="checkout-btn" id="checkoutBtnMobile"><i class="fas fa-shopping-cart"></i> Proceed to checkout</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== ACCOUNT / LOGIN ===== -->
+    <div class="checkout-form-overlay" id="authOverlay" style="z-index:2500;">
+        <div class="checkout-form-box">
+            <div id="authGuest">
+                <h2>👤 Welcome</h2>
+                <p class="subtitle">Login or create an account with your mobile number</p>
+                <div class="auth-tabs">
+                    <button id="tabLogin" class="active" type="button">Login</button>
+                    <button id="tabSignup" type="button">Create account</button>
+                </div>
+                <div class="form-group" id="authNameGroup" style="display:none;">
+                    <label for="authName">Full Name *</label>
+                    <input type="text" id="authName" placeholder="Enter your full name" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number *</label>
+                    <div class="phone-boxes" id="phoneBoxes"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 1"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 2"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 3"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 4"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 5"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 6"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 7"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 8"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 9"><input type="tel" class="phone-box" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Mobile digit 10"></div>
+                </div>
+                <div class="form-group">
+                    <label for="authPassword">Password *</label>
+                    <div class="pw-wrap"><input type="password" id="authPassword" placeholder="At least 6 characters" autocomplete="current-password"><button class="pw-eye" type="button" data-target="authPassword" aria-label="Show or hide password"><i class="fas fa-eye"></i></button></div>
+                </div>
+                <div class="auth-error" id="authError"></div>
+                <button class="btn-submit" id="authSubmitBtn" type="button"><i class="fas fa-sign-in-alt"></i> <span id="authSubmitText">Login</span></button>
+                <button class="btn-cancel" id="authCancelBtn" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== MY ACCOUNT PAGE ===== -->
+    <div class="acct-page" id="accountPage">
+        <div class="acct-topbar">
+            <button class="acct-back" id="acctBack" type="button"><i class="fas fa-arrow-left"></i> <span>Back to shop</span></button>
+            <div class="acct-topbar-title">My Account</div>
+            <button class="acct-logout" id="acctLogout" type="button"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
+        </div>
+        <div class="acct-scroll">
+            <div class="acct-container">
+                <div class="acct-hero">
+                    <div class="acct-avatar-wrap"><div class="acct-avatar" id="acctAvatar">U</div><button class="acct-cam" id="acctCam" type="button" aria-label="Change profile photo"><i class="fas fa-camera"></i></button><input type="file" id="avatarFile" accept="image/*" style="display:none"></div>
+                    <div class="acct-hero-info">
+                        <h1 id="acctName">Welcome</h1>
+                        <p><i class="fas fa-phone-alt"></i> +91 <span id="acctPhone"></span></p>
+                        <span class="acct-badge"><i class="fas fa-gem"></i> <span id="acctSince">Member</span></span>
+                    </div>
+                    <div class="acct-stats">
+                        <div class="acct-stat"><b id="statOrders">0</b><span>Orders</span></div>
+                        <div class="acct-stat"><b id="statSpent">₹0</b><span>Total spent</span></div>
+                    </div>
+                </div>
+
+                <div class="acct-tabs">
+                    <button class="acct-tab active" data-tab="orders" type="button"><i class="fas fa-box"></i> Orders</button>
+                    <button class="acct-tab" data-tab="address" type="button"><i class="fas fa-map-marker-alt"></i> Address</button>
+                    <button class="acct-tab" data-tab="profile" type="button"><i class="fas fa-user"></i> Profile</button>
+                </div>
+
+                <section class="acct-panel active" id="acctPanel-orders">
+                    <div id="acctOrders"></div>
+                </section>
+
+                <section class="acct-panel" id="acctPanel-address">
+                    <div class="acct-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Saved delivery address</h3>
+                        <p class="acct-sub">This address is filled in automatically when you place an order.</p>
+                        <div id="addrView"></div>
+                        <div id="addrEdit" style="display:none;">
+                            <div class="acct-field">
+                                <label for="acctAddress">Delivery address</label>
+                                <textarea id="acctAddress" placeholder="House / flat, street, area, city, PIN code"></textarea>
+                            </div>
+                            <div class="acct-actions">
+                                <button class="acct-btn" id="addrSave" type="button"><i class="fas fa-save"></i> Save address</button>
+                                <button class="acct-btn ghost" id="addrCancel" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="acct-panel" id="acctPanel-profile">
+                    <div class="acct-card">
+                        <h3><i class="fas fa-camera"></i> Profile photo</h3>
+                        <p class="acct-sub">Upload a clear photo of yourself (a square photo works best).</p>
+                        <div class="acct-actions">
+                            <button class="acct-btn" id="photoChoose" type="button"><i class="fas fa-image"></i> Change photo</button>
+                            <button class="acct-btn ghost" id="avatarRemove" type="button" style="display:none;"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="acct-card">
+                        <h3><i class="fas fa-user-circle"></i> Profile details</h3>
+                        <p class="acct-sub">Update the name used on your orders.</p>
+                        <div class="acct-field">
+                            <label for="acctNameInput">Full name</label>
+                            <input type="text" id="acctNameInput" placeholder="Your full name" autocomplete="name">
+                        </div>
+                        <div class="acct-field">
+                            <label for="acctPhoneInput">Mobile number</label>
+                            <input type="text" id="acctPhoneInput" disabled>
+                        </div>
+                        <div class="acct-actions">
+                            <button class="acct-btn" id="profileSave" type="button"><i class="fas fa-check"></i> Save changes</button>
+                            <button class="acct-btn ghost" id="profileLogout" type="button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                        </div>
+                    </div>
+                    <div class="acct-card">
+                        <h3><i class="fas fa-lock"></i> Change password</h3>
+                        <p class="acct-sub">Use at least 6 characters.</p>
+                        <div class="acct-field">
+                            <label for="pwCurrent">Current password</label>
+                            <div class="pw-wrap"><input type="password" id="pwCurrent" autocomplete="current-password"><button class="pw-eye" type="button" data-target="pwCurrent" aria-label="Show or hide password"><i class="fas fa-eye"></i></button></div>
+                        </div>
+                        <div class="acct-field">
+                            <label for="pwNew">New password</label>
+                            <div class="pw-wrap"><input type="password" id="pwNew" autocomplete="new-password"><button class="pw-eye" type="button" data-target="pwNew" aria-label="Show or hide password"><i class="fas fa-eye"></i></button></div>
+                        </div>
+                        <div class="acct-field">
+                            <label for="pwConfirm">Confirm new password</label>
+                            <div class="pw-wrap"><input type="password" id="pwConfirm" autocomplete="new-password"><button class="pw-eye" type="button" data-target="pwConfirm" aria-label="Show or hide password"><i class="fas fa-eye"></i></button></div>
+                        </div>
+                        <div class="auth-error" id="pwError" style="text-align:left;"></div>
+                        <div class="acct-actions">
+                            <button class="acct-btn" id="pwSave" type="button"><i class="fas fa-key"></i> Update password</button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -1221,6 +1485,518 @@
             document.getElementById('mobileWrapper').scrollIntoView({ behavior: 'smooth' });
         });
 
+
+        // ==========================================
+        // ACCOUNT: SIGN UP / LOGIN WITH MOBILE NUMBER
+        // ==========================================
+        // The mobile number becomes a hidden email-style id for Supabase Auth.
+        // In Supabase: Authentication -> Providers -> Email -> turn OFF "Confirm email".
+        // Supabase checks that this domain can receive email (MX records), so a made-up domain is rejected.
+        // kcst.com is used here; no email is ever sent while "Confirm email" is OFF. If you own a domain with email set up, use that instead.
+        const AUTH_EMAIL_DOMAIN = 'kcst.com';
+        let currentUser = null;
+        let authMode = 'login';
+        let afterLoginCheckout = null;
+
+        function normalizePhone(raw) {
+            let d = String(raw || '').replace(/\D/g, '');
+            if (d.length === 12 && d.startsWith('91')) d = d.slice(2);
+            if (d.length === 11 && d.startsWith('0')) d = d.slice(1);
+            return d;
+        }
+        function isValidPhone(d) { return /^[6-9]\d{9}$/.test(d); }
+        function phoneToEmail(d) { return `${d}@${AUTH_EMAIL_DOMAIN}`; }
+        function escapeHtml(t) {
+            return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        // ----- login / sign-up modal -----
+        function setAuthMode(mode) {
+            authMode = mode;
+            const signup = mode === 'signup';
+            document.getElementById('tabLogin').classList.toggle('active', !signup);
+            document.getElementById('tabSignup').classList.toggle('active', signup);
+            document.getElementById('authNameGroup').style.display = signup ? 'block' : 'none';
+            document.getElementById('authSubmitText').textContent = signup ? 'Create account' : 'Login';
+            document.getElementById('authPassword').setAttribute('autocomplete', signup ? 'new-password' : 'current-password');
+            document.getElementById('authError').textContent = '';
+        }
+
+        function openAuth() {
+            document.getElementById('authGuest').style.display = 'block';
+            setAuthMode(authMode);
+            setTimeout(() => { const f = phoneBoxes.findIndex(b => !b.value); phoneBoxes[f === -1 ? 0 : f].focus(); }, 150);
+            document.getElementById('authOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeAuth() {
+            document.getElementById('authOverlay').classList.remove('active');
+            if (!document.getElementById('accountPage').classList.contains('open')) document.body.style.overflow = '';
+            afterLoginCheckout = null;
+        }
+        // account button / Profile tab: logged in -> account page, otherwise -> login
+        function openAccount() {
+            if (currentUser) openAccountPage(); else openAuth();
+        }
+
+        function refreshAccountUI() {
+            const meta = (currentUser && currentUser.user_metadata) || {};
+            const first = meta.full_name ? meta.full_name.split(' ')[0] : null;
+            document.querySelectorAll('#accountBtnDesktop .account-label').forEach(el => {
+                el.textContent = currentUser ? (first || 'Account') : 'Login';
+            });
+        }
+
+        function fillCheckoutFromAccount() {
+            if (!currentUser) return;
+            const meta = currentUser.user_metadata || {};
+            const n = document.getElementById('customerName');
+            const ph = document.getElementById('customerPhone');
+            if (n && !n.value && meta.full_name) n.value = meta.full_name;
+            if (ph && !ph.value && meta.phone) ph.value = meta.phone;
+            const ad = document.getElementById('customerAddress');
+            if (ad && !ad.value && meta.address) ad.value = meta.address;
+        }
+
+        async function submitAuth() {
+            const errEl = document.getElementById('authError');
+            errEl.textContent = '';
+            const name = document.getElementById('authName').value.trim();
+            const phone = getAuthPhone();
+            const password = document.getElementById('authPassword').value;
+
+            if (authMode === 'signup' && !name) { errEl.textContent = 'Please enter your full name.'; return; }
+            if (!isValidPhone(phone)) { errEl.textContent = 'Enter a valid 10-digit mobile number.'; return; }
+            if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
+
+            const btn = document.getElementById('authSubmitBtn');
+            btn.disabled = true;
+            try {
+                const email = phoneToEmail(phone);
+                let signedUser = null;
+                if (authMode === 'signup') {
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email, password,
+                        options: { data: { full_name: name, phone: phone } }
+                    });
+                    if (error) {
+                        errEl.textContent = /already|registered/i.test(error.message)
+                            ? 'This mobile number is already registered. Please login.'
+                            : /rate limit/i.test(error.message)
+                                ? 'Too many sign-up attempts. In Supabase turn OFF "Confirm email", wait about an hour, then try again.'
+                                : error.message;
+                        return;
+                    }
+                    signedUser = data.session ? data.user : null;
+                    if (!signedUser) {
+                        const r = await supabaseClient.auth.signInWithPassword({ email, password });
+                        if (r.error) {
+                            errEl.textContent = 'Account created, but login is blocked. Turn OFF "Confirm email" in Supabase (Authentication > Providers > Email).';
+                            return;
+                        }
+                        signedUser = r.data.user;
+                    }
+                    showToast('✅ Account created!', 'success');
+                } else {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    if (error) {
+                        errEl.textContent = /invalid/i.test(error.message)
+                            ? 'Wrong mobile number or password.'
+                            : error.message;
+                        return;
+                    }
+                    signedUser = data.user;
+                    showToast('✅ Logged in!', 'success');
+                }
+                currentUser = signedUser;
+                refreshAccountUI();
+                document.getElementById('authPassword').value = '';
+                const next = afterLoginCheckout;
+                closeAuth();
+                if (next) openCheckoutForm(next); else openAccountPage();
+            } catch (e) {
+                console.error('Auth error:', e);
+                errEl.textContent = 'Something went wrong. Please try again.';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function logoutUser() {
+            await supabaseClient.auth.signOut();
+            currentUser = null;
+            refreshAccountUI();
+            closeAccountPage();
+            showToast('Logged out', 'info');
+        }
+
+        // ----- 10 single-digit boxes for the mobile number -----
+        const phoneBoxes = Array.from(document.querySelectorAll('#phoneBoxes .phone-box'));
+        function getAuthPhone() { return phoneBoxes.map(b => b.value).join(''); }
+        function syncPhoneBoxStyles() { phoneBoxes.forEach(b => b.classList.toggle('filled', /\d/.test(b.value))); }
+        phoneBoxes.forEach((box, i) => {
+            box.addEventListener('input', () => {
+                box.value = box.value.replace(/\D/g, '').slice(-1);
+                syncPhoneBoxStyles();
+                if (box.value && i < phoneBoxes.length - 1) phoneBoxes[i + 1].focus();
+            });
+            box.addEventListener('keydown', e => {
+                if (e.key === 'Backspace' && !box.value && i > 0) {
+                    e.preventDefault();
+                    phoneBoxes[i - 1].value = '';
+                    syncPhoneBoxStyles();
+                    phoneBoxes[i - 1].focus();
+                } else if (e.key === 'ArrowLeft' && i > 0) {
+                    e.preventDefault(); phoneBoxes[i - 1].focus();
+                } else if (e.key === 'ArrowRight' && i < phoneBoxes.length - 1) {
+                    e.preventDefault(); phoneBoxes[i + 1].focus();
+                } else if (e.key === 'Enter') {
+                    submitAuth();
+                }
+            });
+            box.addEventListener('focus', () => {
+                const firstEmpty = phoneBoxes.findIndex(b => !b.value);
+                if (firstEmpty !== -1 && firstEmpty < i) { phoneBoxes[firstEmpty].focus(); return; }
+                box.select();
+            });
+            box.addEventListener('paste', e => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text');
+                const digits = normalizePhone(text).slice(0, 10);
+                phoneBoxes.forEach((b, k) => { b.value = digits[k] || ''; });
+                syncPhoneBoxStyles();
+                phoneBoxes[Math.min(digits.length, phoneBoxes.length - 1)].focus();
+            });
+        });
+
+        // ==========================================
+        // MY ACCOUNT PAGE (profile, orders, saved address)
+        // ==========================================
+        function fillAccountHero() {
+            const meta = (currentUser && currentUser.user_metadata) || {};
+            const name = meta.full_name || 'My Account';
+            document.getElementById('acctName').textContent = name;
+            document.getElementById('acctPhone').textContent = meta.phone || '';
+            renderAvatar();
+            const since = currentUser && currentUser.created_at
+                ? new Date(currentUser.created_at).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }) : '';
+            document.getElementById('acctSince').textContent = since ? 'Member since ' + since : 'Member';
+            document.getElementById('acctNameInput').value = meta.full_name || '';
+            document.getElementById('acctPhoneInput').value = meta.phone ? '+91 ' + meta.phone : '';
+        }
+
+        function setAcctTab(tab) {
+            document.querySelectorAll('.acct-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+            document.querySelectorAll('.acct-panel').forEach(p => p.classList.toggle('active', p.id === 'acctPanel-' + tab));
+        }
+
+        function renderAddress(editing) {
+            const meta = (currentUser && currentUser.user_metadata) || {};
+            const addr = (meta.address || '').trim();
+            document.getElementById('addrEdit').style.display = editing ? 'block' : 'none';
+            const view = document.getElementById('addrView');
+            view.style.display = editing ? 'none' : 'block';
+            if (editing) {
+                document.getElementById('acctAddress').value = addr;
+                document.getElementById('acctAddress').focus();
+                return;
+            }
+            view.innerHTML = `
+                <div class="addr-box">
+                    <div class="addr-pin"><i class="fas fa-home"></i></div>
+                    <div class="addr-text ${addr ? '' : 'addr-empty'}">${addr ? escapeHtml(addr) : 'No address saved yet.'}</div>
+                </div>
+                <button class="acct-btn" id="addrEditBtn" type="button"><i class="fas fa-pen"></i> ${addr ? 'Edit address' : 'Add address'}</button>`;
+            document.getElementById('addrEditBtn').addEventListener('click', () => renderAddress(true));
+        }
+
+        async function saveAddress() {
+            if (!currentUser) return;
+            const address = document.getElementById('acctAddress').value.trim();
+            const btn = document.getElementById('addrSave');
+            btn.disabled = true;
+            try {
+                const { data, error } = await supabaseClient.auth.updateUser({ data: { address: address } });
+                if (error) { showToast('Could not save address', 'error'); return; }
+                if (data && data.user) currentUser = data.user;
+                showToast('✅ Address saved', 'success');
+                renderAddress(false);
+            } catch (e) {
+                showToast('Could not save address', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function saveProfile() {
+            if (!currentUser) return;
+            const name = document.getElementById('acctNameInput').value.trim();
+            if (!name) { showToast('Please enter your name', 'error'); return; }
+            const btn = document.getElementById('profileSave');
+            btn.disabled = true;
+            try {
+                const { data, error } = await supabaseClient.auth.updateUser({ data: { full_name: name } });
+                if (error) { showToast('Could not save changes', 'error'); return; }
+                if (data && data.user) currentUser = data.user;
+                fillAccountHero();
+                refreshAccountUI();
+                showToast('✅ Profile updated', 'success');
+            } catch (e) {
+                showToast('Could not save changes', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function orderStatusInfo(st) {
+            const t = String(st || 'Pending');
+            if (/cancel|reject/i.test(t)) return { cls: 'cancel', step: -1, icon: 'fa-times-circle' };
+            if (/deliver|complete|done/i.test(t)) return { cls: 'done', step: 3, icon: 'fa-check-circle' };
+            if (/ship|dispatch|out for/i.test(t)) return { cls: '', step: 2, icon: 'fa-truck' };
+            if (/confirm|process|accept|pack|paid/i.test(t)) return { cls: '', step: 1, icon: 'fa-box-open' };
+            return { cls: '', step: 0, icon: 'fa-clock' };
+        }
+
+        async function loadMyOrders() {
+            const box = document.getElementById('acctOrders');
+            if (!currentUser) return;
+            box.innerHTML = '<div class="acct-empty"><div class="em">⏳</div><p style="margin:0">Loading your orders...</p></div>';
+            const meta = currentUser.user_metadata || {};
+            let filter = `user_id.eq.${currentUser.id}`;
+            if (meta.phone) filter += `,customer_phone.like.*${meta.phone}`;
+
+            let { data, error } = await supabaseClient.from('orders').select('*').or(filter).limit(50);
+            if (error && meta.phone) {
+                // user_id column may not exist yet - fall back to phone number only
+                ({ data, error } = await supabaseClient.from('orders').select('*').like('customer_phone', `%${meta.phone}`).limit(50));
+            }
+            if (error) {
+                console.error('Orders load error:', error);
+                box.innerHTML = '<div class="acct-empty"><div class="em">⚠️</div><h4>Could not load orders</h4><p>Please try again in a moment.</p></div>';
+                return;
+            }
+            if (!data || data.length === 0) {
+                document.getElementById('statOrders').textContent = '0';
+                document.getElementById('statSpent').textContent = formatCurrency(0);
+                box.innerHTML = '<div class="acct-empty"><div class="em">🛍️</div><h4>No orders yet</h4><p>Your orders will appear here after you place one.</p><button class="acct-btn" id="acctShopBtn" type="button"><i class="fas fa-shopping-bag"></i> Start shopping</button></div>';
+                document.getElementById('acctShopBtn').addEventListener('click', closeAccountPage);
+                return;
+            }
+            data.sort((x, y) => new Date(y.created_at || 0) - new Date(x.created_at || 0));
+
+            let spent = 0;
+            data.forEach(o => { if (!/cancel|reject/i.test(String(o.status || ''))) spent += Number(o.total_amount) || 0; });
+            document.getElementById('statOrders').textContent = data.length;
+            document.getElementById('statSpent').textContent = formatCurrency(spent);
+
+            const labels = ['Placed', 'Confirmed', 'Shipped', 'Delivered'];
+            box.innerHTML = data.map(o => {
+                let items = o.order_items;
+                if (typeof items === 'string') { try { items = JSON.parse(items); } catch (e) { items = []; } }
+                if (!Array.isArray(items)) items = [];
+                const rows = items.map(i => {
+                    const title = escapeHtml(i.name || i.size || 'Item');
+                    const size = i.name && i.size ? `<small>${escapeHtml(i.size)} × ${escapeHtml(i.qty)}</small>` : `<small>× ${escapeHtml(i.qty)}</small>`;
+                    const amt = Number(i.price) ? formatCurrency(Number(i.price) * (Number(i.qty) || 1)) : '';
+                    return `<div class="ord-item"><span>${title}${size}</span><span class="amt">${amt}</span></div>`;
+                }).join('');
+                const d = o.created_at ? new Date(o.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+                const st = String(o.status || 'Pending');
+                const info = orderStatusInfo(st);
+                const tracker = info.step >= 0
+                    ? `<div class="ord-trk">${labels.map((l, k) => `<div class="ord-step ${k <= info.step ? 'on' : ''}">${l}</div>`).join('')}</div>`
+                    : '';
+                const ref = String(o.id == null ? '' : o.id).slice(-6).toUpperCase();
+                return `<div class="ord">
+                    <div class="ord-head">
+                        <div><div class="ord-no">Order #${escapeHtml(ref)}</div><div class="ord-date">${escapeHtml(d)}</div></div>
+                        <span class="ord-pill ${info.cls}"><i class="fas ${info.icon}"></i> ${escapeHtml(st)}</span>
+                    </div>
+                    <div class="ord-body">${rows}${tracker}</div>
+                    <div class="ord-foot"><span>Total</span><span class="tot">${formatCurrency(Number(o.total_amount) || 0)}</span></div>
+                </div>`;
+            }).join('');
+        }
+
+        function openAccountPage() {
+            if (!currentUser) { openAuth(); return; }
+            fillAccountHero();
+            renderAddress(false);
+            setAcctTab('orders');
+            document.getElementById('accountPage').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            loadMyOrders();
+        }
+        function closeAccountPage() {
+            document.getElementById('accountPage').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ----- profile photo -----
+        function localAvatarKey() { return 'pm_avatar_' + (currentUser ? currentUser.id : ''); }
+        function getAvatarUrl() {
+            try { const l = localStorage.getItem(localAvatarKey()); if (l) return l; } catch (e) {}
+            const meta = (currentUser && currentUser.user_metadata) || {};
+            return meta.avatar_url || '';
+        }
+        function renderAvatar() {
+            const el = document.getElementById('acctAvatar');
+            const url = getAvatarUrl();
+            if (url) {
+                el.style.backgroundImage = `url("${url}")`;
+                el.style.backgroundSize = 'cover';
+                el.style.backgroundPosition = 'center';
+                el.textContent = '';
+            } else {
+                const meta = (currentUser && currentUser.user_metadata) || {};
+                el.style.backgroundImage = '';
+                el.textContent = (meta.full_name || meta.phone || 'U').trim().charAt(0);
+            }
+            document.getElementById('avatarRemove').style.display = url ? 'inline-flex' : 'none';
+        }
+        function resizeImage(file, size) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => {
+                    const c = document.createElement('canvas');
+                    c.width = c.height = size;
+                    const m = Math.min(img.width, img.height);
+                    c.getContext('2d').drawImage(img, (img.width - m) / 2, (img.height - m) / 2, m, m, 0, 0, size, size);
+                    URL.revokeObjectURL(url);
+                    c.toBlob(b => b ? resolve(b) : reject(new Error('blob')), 'image/jpeg', 0.85);
+                };
+                img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('image')); };
+                img.src = url;
+            });
+        }
+        function blobToDataUrl(blob) {
+            return new Promise(resolve => { const r = new FileReader(); r.onload = () => resolve(r.result); r.readAsDataURL(blob); });
+        }
+        async function changeAvatar(file) {
+            if (!file || !currentUser) return;
+            if (!/^image\//.test(file.type)) { showToast('Please choose an image file', 'error'); return; }
+            if (file.size > 8 * 1024 * 1024) { showToast('Image is too large (max 8 MB)', 'error'); return; }
+            let blob;
+            try { blob = await resizeImage(file, 320); } catch (e) { showToast('Could not read this image', 'error'); return; }
+            showToast('Uploading photo...', 'info');
+            const path = `${currentUser.id}/avatar.jpg`;
+            const up = await supabaseClient.storage.from('avatars').upload(path, blob, { upsert: true, contentType: 'image/jpeg' });
+            if (!up.error) {
+                const { data: pub } = supabaseClient.storage.from('avatars').getPublicUrl(path);
+                const url = pub.publicUrl + '?v=' + Date.now();
+                const { data, error } = await supabaseClient.auth.updateUser({ data: { avatar_url: url } });
+                if (!error && data && data.user) currentUser = data.user;
+                try { localStorage.removeItem(localAvatarKey()); } catch (e) {}
+                renderAvatar();
+                showToast('✅ Profile photo updated', 'success');
+                return;
+            }
+            console.error('Avatar upload error:', up.error);
+            // storage bucket not set up: keep the photo on this device only
+            try {
+                localStorage.setItem(localAvatarKey(), await blobToDataUrl(blob));
+                renderAvatar();
+                showToast('Photo saved on this device only (cloud storage is not set up yet)', 'info');
+            } catch (e) {
+                showToast('Could not save photo', 'error');
+            }
+        }
+        async function removeAvatar() {
+            if (!currentUser) return;
+            try { localStorage.removeItem(localAvatarKey()); } catch (e) {}
+            try { await supabaseClient.storage.from('avatars').remove([`${currentUser.id}/avatar.jpg`]); } catch (e) {}
+            const { data } = await supabaseClient.auth.updateUser({ data: { avatar_url: null } });
+            if (data && data.user) currentUser = data.user;
+            renderAvatar();
+            showToast('Photo removed', 'info');
+        }
+
+        // ----- change password -----
+        function resetPwEyes() {
+            document.querySelectorAll('.pw-eye').forEach(b => {
+                const inp = document.getElementById(b.dataset.target);
+                if (inp) inp.type = 'password';
+                b.innerHTML = '<i class="fas fa-eye"></i>';
+            });
+        }
+        async function changePassword() {
+            if (!currentUser) return;
+            const cur = document.getElementById('pwCurrent').value;
+            const nw = document.getElementById('pwNew').value;
+            const cf = document.getElementById('pwConfirm').value;
+            const err = document.getElementById('pwError');
+            err.textContent = '';
+            if (!cur) { err.textContent = 'Enter your current password.'; return; }
+            if (nw.length < 6) { err.textContent = 'New password must be at least 6 characters.'; return; }
+            if (nw !== cf) { err.textContent = 'New passwords do not match.'; return; }
+            if (nw === cur) { err.textContent = 'New password must be different from the current one.'; return; }
+            const btn = document.getElementById('pwSave');
+            btn.disabled = true;
+            try {
+                const meta = currentUser.user_metadata || {};
+                const email = currentUser.email || phoneToEmail(meta.phone || '');
+                const check = await supabaseClient.auth.signInWithPassword({ email, password: cur });
+                if (check.error) { err.textContent = 'Current password is incorrect.'; return; }
+                const { error } = await supabaseClient.auth.updateUser({ password: nw });
+                if (error) { err.textContent = error.message; return; }
+                ['pwCurrent', 'pwNew', 'pwConfirm'].forEach(id => document.getElementById(id).value = '');
+                resetPwEyes();
+                showToast('✅ Password changed', 'success');
+            } catch (e) {
+                console.error('Password change error:', e);
+                err.textContent = 'Something went wrong. Please try again.';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // show / hide password (works for every .pw-eye button)
+        document.addEventListener('click', e => {
+            const b = e.target.closest('.pw-eye');
+            if (!b) return;
+            const inp = document.getElementById(b.dataset.target);
+            if (!inp) return;
+            const show = inp.type === 'password';
+            inp.type = show ? 'text' : 'password';
+            b.innerHTML = show ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        });
+
+        document.getElementById('acctCam').addEventListener('click', () => document.getElementById('avatarFile').click());
+        document.getElementById('photoChoose').addEventListener('click', () => document.getElementById('avatarFile').click());
+        document.getElementById('avatarFile').addEventListener('change', function() { changeAvatar(this.files[0]); this.value = ''; });
+        document.getElementById('avatarRemove').addEventListener('click', removeAvatar);
+        document.getElementById('pwSave').addEventListener('click', changePassword);
+
+        document.getElementById('tabLogin').addEventListener('click', () => setAuthMode('login'));
+        document.getElementById('tabSignup').addEventListener('click', () => setAuthMode('signup'));
+        document.getElementById('authSubmitBtn').addEventListener('click', submitAuth);
+        document.getElementById('authCancelBtn').addEventListener('click', closeAuth);
+        document.getElementById('authOverlay').addEventListener('click', function(e) { if (e.target === this) closeAuth(); });
+        ['authName', 'authPassword'].forEach(id =>
+            document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') submitAuth(); }));
+        document.getElementById('accountBtnDesktop').addEventListener('click', openAccount);
+        document.getElementById('accountBtnMobile').addEventListener('click', openAccount);
+        document.getElementById('navProfileMobile').addEventListener('click', openAccount);
+
+        document.getElementById('acctBack').addEventListener('click', closeAccountPage);
+        document.getElementById('acctLogout').addEventListener('click', logoutUser);
+        document.getElementById('profileLogout').addEventListener('click', logoutUser);
+        document.getElementById('addrSave').addEventListener('click', saveAddress);
+        document.getElementById('addrCancel').addEventListener('click', () => renderAddress(false));
+        document.getElementById('profileSave').addEventListener('click', saveProfile);
+        document.querySelectorAll('.acct-tab').forEach(b => b.addEventListener('click', () => setAcctTab(b.dataset.tab)));
+
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            currentUser = session ? session.user : null;
+            refreshAccountUI();
+            if (!currentUser) closeAccountPage();
+        });
+        supabaseClient.auth.getSession().then(({ data }) => {
+            currentUser = data.session ? data.session.user : null;
+            refreshAccountUI();
+        });
+
         // ==========================================
         // CHECKOUT
         // ==========================================
@@ -1235,6 +2011,7 @@
             });
             summary += `\n<strong>Total: ${formatCurrency(total)}</strong>`;
             document.getElementById('orderSummaryText').innerHTML = summary.replace(/\n/g, '<br>');
+            fillCheckoutFromAccount();
             document.getElementById('checkoutFormOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1252,11 +2029,13 @@
 
         document.getElementById('checkoutBtnDesktop').addEventListener('click', function() {
             if (cart.length === 0) { showToast('Your cart is empty!', 'error'); return; }
+            if (!currentUser) { closeCartDesktop(); closeCartMobile(); afterLoginCheckout = 'desktop'; setAuthMode('login'); openAuth(); showToast('Please login to place your order', 'info'); return; }
             openCheckoutForm('desktop');
         });
 
         document.getElementById('checkoutBtnMobile').addEventListener('click', function() {
             if (cart.length === 0) { showToast('Your cart is empty!', 'error'); return; }
+            if (!currentUser) { closeCartDesktop(); closeCartMobile(); afterLoginCheckout = 'mobile'; setAuthMode('login'); openAuth(); showToast('Please login to place your order', 'info'); return; }
             openCheckoutForm('mobile');
         });
 
@@ -1317,17 +2096,21 @@
 
             // ===== SAVE ORDER TO SUPABASE =====
             try {
-                const { data, error } = await supabaseClient
-                    .from('orders')
-                    .insert([{
-                        customer_name: name,
-                        customer_phone: phone,
-                        customer_address: address,
-                        customer_notes: notes,
-                        order_items: orderItems,
-                        total_amount: total,
-                        status: 'Pending'
-                    }]);
+                const orderRow = {
+                    customer_name: name,
+                    customer_phone: phone,
+                    customer_address: address,
+                    customer_notes: notes,
+                    order_items: orderItems,
+                    total_amount: total,
+                    status: 'Pending'
+                };
+                // link the order to the logged-in account (needs a user_id column); retry without it if the column is missing
+                let { data, error } = await supabaseClient.from('orders')
+                    .insert([{ ...orderRow, user_id: currentUser ? currentUser.id : null }]);
+                if (error && /user_id/i.test(error.message || '')) {
+                    ({ data, error } = await supabaseClient.from('orders').insert([orderRow]));
+                }
 
                 if (error) {
                     console.error('❌ Error saving order:', error);
@@ -1337,6 +2120,10 @@
                 }
                 console.log('✅ Order saved to database:', data);
                 showToast('✅ Order placed successfully!', 'success');
+                if (currentUser && !(currentUser.user_metadata || {}).address) {
+                    supabaseClient.auth.updateUser({ data: { address: address } })
+                        .then(r => { if (r.data && r.data.user) currentUser = r.data.user; });
+                }
             } catch (e) {
                 console.error('❌ Error:', e);
                 if (waWindow) waWindow.close();
